@@ -71,7 +71,8 @@ function displayImages(){
         let imageObject = randomImage();
         elImageContainer.appendChild(elImage);
         elImage.setAttribute('id', imageObject.name);
-        elImage.innerHTML = imageObject.filePath;
+        elImage.src = imageObject.filePath;
+
         //elimage.innerHTML = 
     }
 }
@@ -97,6 +98,8 @@ displayImages();
 // define even handler function that will increment thetimes clicked for the firstImage
 function imageClicked(event){
     firstImage.clicked += 1; 
+    secondImage.clicked += 1;
+    thirdImage.clicked += 1;
     console.log('event', event.target.id);
     
 }; 
