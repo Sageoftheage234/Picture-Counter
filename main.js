@@ -53,17 +53,16 @@ characterImageArray.push(Naruto,Sasuke,Sakura,Itachi,Madara,Goku,Vegeta,Jiren,Pi
 
 function randomImage(){
    let randomNumber = Math.floor(Math.random() * characterImageArray.length);
-    //let imageIndex = 
-     return characterImageArray[randomNumber];
-    //imageIndex.shown += 1;
-    //return imageIndex;
+   let imageIndex = characterImageArray[randomNumber];
+   imageIndex.shown += 1;
+   return imageIndex;
 };
 
 let firstImage = randomImage();
 let secondImage = randomImage();
 let thirdImage = randomImage();
 
-
+//let the src attribute of our image tages to the filePath of our new images
 imageOne.src = firstImage.filePath;
 imageTwo.src = secondImage.filePath;
 imageThree.src = thirdImage.filePath;
@@ -77,6 +76,7 @@ function imageClicked(event){
     console.log('first Image clicked property',firstImage.clicked);
     console.log('first image shown property', firstImage.shown);
 }; 
+imageOne.addEventListener('click', imageClicked)
 
 console.log('first image shown property', firstImage.shown);
 console.log('second image shown property', secondImage.shown);
@@ -99,7 +99,6 @@ console.log('third image shown property', thirdImage.shown);
         //         let secondImage;
         //         let thirdImage
                 
-imageOne.addEventListener('click', imageClicked)
                 
                 // function displayImages(){
                     //     elImageContainer.innerHTML = '';
