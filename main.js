@@ -1,13 +1,14 @@
 //declare the variable characterImageArray  and assign the its values as an empty array which will hold all of the image objects
 let characterImageArray = [];
 
-//find image container element using document.getElementById
-let elImageContainer = document.getElementById('image-container');
-
 //use getElementById to find our image tags in HTML
-let  imageOne = document.getElementById('image1');
-let  imageTwo = document.getElementById('image2');
-let  imageThree = document.getElementById('image3')
+// let  imageOne = document.getElementById('image1');
+// let  imageTwo = document.getElementById('image2');
+// let  imageThree = document.getElementById('image3')
+
+//find our image container using document.getElementById
+let elImageContainer = document.getElementById('image-container');
+console.log(elImageContainer);
 
 //create an object constructor that will take in parameters and store properties of an image
 let CharacterImage  = function(name, show, filePath){
@@ -62,29 +63,45 @@ function randomImage(){
    //return our random image object
    return imageIndex;
 };
-//declaring variables that will store the return value for our random image function
-let firstImage = randomImage();
-let secondImage = randomImage();
-let thirdImage = randomImage();
 
-//let the src attribute of our image tages to the filePath of our new images
-imageOne.src = firstImage.filePath;
-imageTwo.src = secondImage.filePath;
-imageThree.src = thirdImage.filePath;
+// define a function that will display the Random images
+function displayImages(){
+    for(let i = 0; i < 3; i++){
+        let elImage = document.createElement('img');
+        let imageObject = randomImage();
+        elImageContainer.appendChild(elImage);
+        elImage.setAttribute('id', imageObject.name);
+        elImage.innerHTML = imageObject.filePath;
+        //elimage.innerHTML = 
+    }
+}
+displayImages();
+
+
+
+
+
+
+
+// //declaring variables that will store the return value for our random image function
+// let firstImage = randomImage();
+// let secondImage = randomImage();
+// let thirdImage = randomImage();
+
+// //let the src attribute of our image tages to the filePath of our new images
+// imageOne.src = firstImage.filePath;
+// imageTwo.src = secondImage.filePath;
+// imageThree.src = thirdImage.filePath;
 
 
 // define even handler function that will increment thetimes clicked for the firstImage
 function imageClicked(event){
     firstImage.clicked += 1; 
-    console.log('first Image clicked property',firstImage.clicked);
-    console.log('first image shown property', firstImage.shown);
+    console.log('event', event.target.id);
+    
 }; 
 //attach an event listener to the imageOne html tage and listen for a click eent that will invoke addEventListener method
-imageOne.addEventListener('click', imageClicked)
-
-console.log('first image shown property', firstImage.shown);
-console.log('second image shown property', secondImage.shown);
-console.log('third image shown property', thirdImage.shown);
+// imageOne.addEventListener('click', imageClicked)
 
     // if(event.target.id === firstImage.id){
         //         firstImage.clicked += 1;
@@ -106,7 +123,6 @@ console.log('third image shown property', thirdImage.shown);
                 
                 // function displayImages(){
                     //     elImageContainer.innerHTML = '';
-                    //     for(let i = 0; i < 3; i++){
                         //         let elImage = document.createElement('img');
                         //         let imageObject = randomImage();
                         //         elImageContainer.appendChild(elImage);
