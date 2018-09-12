@@ -1,141 +1,125 @@
+//declare the variable characterImageArray  and assign the its values as an empty array which will hold all of the image objects
 let characterImageArray = [];
 
+//find image container element using document.getElementById
+let elImageContainer = document.getElementById('image-container');
 
 let  imageOne = document.getElementById('image1');
 let  imageTwo = document.getElementById('image2');
 let  imageThree = document.getElementById('image3')
 
-
+//create an object constructor that will take in parameters and store properties of an image
 let CharacterImage  = function(name, show, filePath){
     this.name = name;
     this.show = show;
     this.filePath = filePath
     this.clicked = 0;
     this.shown = 0;
+    this.addClicks;
 };
+
+
+
 //let [variable] = newCharacterImage('Name','Show','filePath');
-let naruto = newCharacterImage('Naruto','Naruto','./Code-Partners-Click-Pic-Project/Naruto/Naruto-Naruto.jpg');
-let sasuke = newCharacterImage('Sasuke','Naruto','./Code-Partners-Click-Pic-Project/Naruto/Sasuke-Naruto.jpg');
-let sakura = newCharacterImage('Sakura','Naruto','.Code-Partners-Click-Pic-Project/Naruto/Sakura-Naruto.jpg');
-let itachi = newCharacterImage('Itachi','Naruto','./Code-Partners-Click-Pic-Project/Naruto/Itachi-Naruto.jpg');
-let madara = newCharacterImage('Madara','Naruto','./Code-Partners-Click-Pic-Project/Naruto/Madara-Naruto.jpg');
-let goku = newCharacterImage('Goku','DragonBall-Z','./Code-Partners-Click-Pic-Project/DragonBall-Z/Goku-DragonBallZ.jpeg');
-let jiren = newCharacterImage('Jiren','DragonBall-Z','./Code-Partners-Click-Pic-Project/DragonBall-Z/Jiren-DragonBallZ.jpg');
-let vegeta = newCharacterImage('Vegeta','DragonBall-Z','./Code-Partners-Click-Pic-Project/DragonBall-Z/Vegeta-DragonBallZ.jpg');
-let gohan = newCharacterImage('Gohan','DragonBall-Z','./Code-Partners-Click-Pic-Project/Gohan-DragonBallZ.jpg');
-let piccolo = newCharacterImage('Piccolo','DragonBall-Z','./Code-Partners-Click-Pic-Project/DragonBall-Z/Piccolo-DragonBallZ.jpg');
-let bart = newCharacterImage('Bart','The Simpsons','./Code-Partners-Click-Pic-Project/The-Simpsons/Bart-Simpsons.png');
-let lisa = newCharacterImage('Lisa','The Simpsons','./Code-Partners-Click-Pic-Project/The-Simpsons/Lisa-Simpsons.png');
-let homer = newCharacterImage('Homer','The Simpsons','./Code-Partners-Click-Pic-Project/The-Simpsons/Homer-Simpsons.png');
-let marge = newCharacterImage('Marge','The Simpsons','./Code-Partners-Click-Pic-Project/The-Simpsons/Marge-Simpsons.png');
-let maggie = newCharacterImage('Maggie','The Simpsons','./Code-Partners-Click-Pic-Project/The-Simpsons/Maggie-Simpsons.png');
-let lana = newCharacterImage('Lana','Archer','./Code-Partners-Click-Pic-Project/Archer/Lana-Archer.jpg');
-let cheryl = newCharacterImage('Cheryl','Archer','./Code-Partners-Click-Pic-Project/Archer/Cheryl-Archer.jpg');
-let archer = newCharacterImage('Archer','Archer','./Code-Partners-Click-Pic-Project/Archer/Archer-Archer.jpg');
-let cyrril = newCharacterImage('Cyrril','Archer','./Code-Partners-Click-Pic-Project/Archer/Cyrril-Archer.jpg');
-let pam = newCharacterImage('Pam','Archer','./Code-Partners-Click-Pic-Project/Archer/Pam-Archer.jpg');
-let armin = newCharacterImage('Armin','Attack On Titan','./Code-Partners-Click-Pic-Project/AttackOnTitan/Armin-AttackOnTitan.jpg');
-let eren = newCharacterImage('Eren','Attack On Titan','./Code-Partners-Click-Pic-Project/Eren-AttackOnTitan.png');
-let mikasa= newCharacterImage('Mikasa','Attack On Titan','./Code-Partners-Click-Pic-Project/Mikasa-AttackOnTitan.jpg');
-let levi = newCharacterImage('Cpt Levi','Attack On Titan','./Code-Partners-Click-Pic-Project/CptLevi-AttackOnTitan.png');
-let hange = newCharacterImage('Cmdr Hange','Attack On Titan','./Code-Partners-Click-Pic-Project/CmdrHange-AttackOnTitan.jpg');
+let Naruto = new CharacterImage('Naruto','Naruto','./Naruto-Naruto.jpg');
+let Sasuke = new CharacterImage('Sasuke','Naruto','./Sasuke-Naruto.jpg');
+let Sakura = new CharacterImage('Sakura','Naruto','./Sakura-Naruto.jpg');
+let Itachi = new CharacterImage('Itachi','Naruto','./Itachi-Naruto.jpg');
+let Madara = new CharacterImage('Madara','Naruto','./Madara-Naruto.jpg');
+let Goku = new CharacterImage('Goku','DragonBall-Z','./Goku-DragonBallZ.jpeg');
+let Jiren = new CharacterImage('Jiren','DragonBall-Z','./Jiren-DragonBallZ.jpg');
+let Vegeta = new CharacterImage('Vegeta','DragonBall-Z','./Vegeta-DragonBallZ.jpg');
+let Gohan = new CharacterImage('Gohan','DragonBall-Z','./Gohan-DragonBallZ.jpg');
+let Piccolo = new CharacterImage('Piccolo','DragonBall-Z','./Piccolo-DragonBallZ.jpg');
+let Bart = new CharacterImage('Bart','The Simpsons','./Bart-Simpsons.png');
+let Lisa = new CharacterImage('Lisa','The Simpsons','./Lisa-Simpsons.png');
+let Homer = new CharacterImage('Homer','The Simpsons','./Homer-Simpsons.png');
+let Marge = new CharacterImage('Marge','The Simpsons','./Marge-Simpsons.png');
+let Maggie = new CharacterImage('Maggie','The Simpsons','./Maggie-Simpsons.png');
+let Lana = new CharacterImage('Lana','Archer','./Lana-Archer.jpg');
+let Cheryl = new CharacterImage('Cheryl','Archer','./Cheryl-Archer.jpg');
+let Archer = new CharacterImage('Archer','Archer','./Archer-Archer.jpg');
+let Cyrril = new CharacterImage('Cyrril','Archer','./Cyrril-Archer.jpg');
+let Pam = new CharacterImage('Pam','Archer','./Pam-Archer.jpg');
+let Armin = new CharacterImage('Armin','Attack On Titan','./Armin-AttackOnTitan.jpg');
+let Eren = new CharacterImage('Eren','Attack On Titan','./Eren-AttackOnTitan.png');
+let Mikasa= new CharacterImage('Mikasa','Attack On Titan','./Mikasa-AttackOnTitan.jpg');
+let Levi = new CharacterImage('Cpt Levi','Attack On Titan','./CptLevi-AttackOnTitan.png');
+let Hange = new CharacterImage('Cmdr Hange','Attack On Titan','./CmdrHange-AttackOnTitan.jpg');
 
 
-characterImageArray.push(naruto,sasuke,sakura,itachi,madara,goku,vegeta,jiren,piccolo,gohan,bart,lisa,homer,marge,maggie,cyrril, cheryl,pam,archer,lana, armin,mikasa,levi,hange,eren,); 
 
+characterImageArray.push(Naruto,Sasuke,Sakura,Itachi,Madara,Goku,Vegeta,Jiren,Piccolo,Gohan,Bart,Lisa,Homer,Marge,Maggie,Cyrril,Cheryl,Pam,Archer,Lana, Armin,Mikasa,Levi,Hange,Eren); 
 
 function randomImage(){
-    let randomNumber = Math.floor(Math.random() * characterImageArray.length);
-    let imageIndex = characterImageArray[randomNumber]
-    imageIndex.shown += 1;
-    return imageIndex;
+   let randomNumber = Math.floor(Math.random() * characterImageArray.length);
+    //let imageIndex = 
+     return characterImageArray[randomNumber];
+    //imageIndex.shown += 1;
+    //return imageIndex;
 };
 
-function displayImages(){
-    for(let i = 0; i < 3; i++){
-    let elImage = document.createElement('img');
-    let imageObject = randomImage();
-    elImageContainer.appendChild(elImage);
-    elImage.setAttribute('id', imageObject.name);
-    elImage.src = imageObject.filePath
-    }  
-}
+let firstImage = randomImage();
+let secondImage = randomImage();
+let thirdImage = randomImage();
 
-displayImages();
 
-//declaring variables that will store the return valuefor our random image function 
-//let numImage = randomImage();
-firstImage = randomImage();
-secondImage = randomImage();
-thirdImage = randomImage();
-// fourthImage = randomImage();
-// fifthImage = randomImage();
-// sixthImage = randomImage();
-// seventhImage = randomImage();
-// eighthImage = randomImage();
-// ninthImage = randomImage();
-// tenthImage = randomImage();
-// eleventhImage = randomImage();
-// twelvthImage = randomImage();
-// thirteenthImage = randomImage();
-// fourteenthImage = randomImage();
-// fifteenthImage = randomImage();
-// sixteenthImage = randomImage();
-// seventeenthImage = randomImage();
-// eighteenthImage = randomImage();
-// nineteenthImage = randomImage();
-// twentiethImage = randomImage();
-// twentyfirstImage = randomImage();
-// twentysecondImage = randomImage();
-// twentythirdImage = randomImage();
-// twentyfourthImage = randomImage();
-// twentyfifthImage = randomImage();
+imageOne.src = randomImage().filePath;
+imageTwo.src = randomImage().filePath;
+imageThree.src = randomImage().filePath;
 
 
 
-
-//set the src attribute of the image tages to the filepath of the new images
-//imageNum.src = numberOrderImage.filePath;
-imageOne.src = firstImage.filePath
-imageTwo.src = secondImage.filePath;
-imageThree.src = thirdImage.filePath;
-// imageFour.src = fourthImage.filePath;
-// imageFive.src = fifthImage.filePath;
-// imageSix.src = sixthImage.filePath;
-// imageSeven.src = seventhImage.filePath;
-// imageEight.src = eighthImage.filePath;
-// imageNine.src = ninthImage.filePath;
-// imageTen.src = tenthImage.filePath;
-// imageEleven.src = eleventhImage.filePath;
-// imageTwelve.src = twelvthImage.filePath;
-// imageThirtheen.src = thirteenthImage.filePath;
-// imageFourteen.src = fourteenthImage.filePath;
-// imageFifteen.src = fifteenthImage.filePath;
-// imageSixteen.src = sixteenthImage.filePath;
-// imageSeventeen.src = seventeenthImage.filePath;
-// imageEighteen.src = eighteenthImage.filePath;
-// imageNineteen.src = nineteenthImage.filePath;
-// imageTwenty.src = twentiethImage.filePath;
-// imageTwentyOne.src = twentyfirstImage.filePath;
-// imageTwentyTwo.src = twentysecondImage.filePath;
-// imageTwentyThree.src = twentythirdImage.filePath;
-// imageTwentyFour.src = twentyfourthImage.filePath;
-// imageTwentyFive.src = twentyfifthImage.filePath;
 
 
 function imageClicked(event){
-    firstImage.clicked += 1;
-    console.log('event', event.target.id)
-    console.log('number image clicked property', numberOrderImage.clicked)
+    firstImage.clicked += 1; 
+    console.log('first Image clicked property',firstImage.clicked);
+    console.log('first image shown property', firstImage.shown);
+}; 
 
-}
+console.log('first image shown property', firstImage.shown);
+console.log('second image shown property', secondImage.shown);
+console.log('third image shown property', thirdImage.shown);
 
-//add an event listener to each displayed picture to capture click
-imageOne.addEventListener('click', imageClicked);
-imageTwo.addEventListener('click', imageClicked);
-imageThree.addEventListener('click', imageClicked);
+    // if(event.target.id === firstImage.id){
+        //         firstImage.clicked += 1;
+        //     } else if(event.target.id === secondImage.id){
+        //             secondImage.clicked += 1;
+        //         } else if (event.target.id === thirdImage.id){
+        //                 thirdImage.clicked += 1;
+        //             }
+        //         }
+        //         displayImages();
+                
+        //         localStorage.setItem('storageHeroImgArr', JSON.stringify(characterImageArray));
+                
+                
+        //         let firstImage;
+        //         let secondImage;
+        //         let thirdImage
+                
+imageOne.addEventListener('click', imageClicked)
+                
+                // function displayImages(){
+                    //     elImageContainer.innerHTML = '';
+                    //     for(let i = 0; i < 3; i++){
+                        //         let elImage = document.createElement('img');
+                        //         let imageObject = randomImage();
+                        //         elImageContainer.appendChild(elImage);
+                        //         elImage.setAttribute('id', imageObject.id);
+                        //         elImage.src = imageObject.filePath;
+                        //         elImage.addEventListener('click', imageClicked);
+//         imageObject.shown += 1;
 
+//         if(i===0){
+//             firstimage = imageObject;
+//         } else if (i === 1){
+//             secondImage = imageObject;
+//     }
+// }  
 
+//displayImages();
 
-
-console.log('numberOrder Image Shown', numberOrderImage.shown)
+//console.log(elImageContainer);
+//console.log('images', firstImage, secondImage, thirdImage)
