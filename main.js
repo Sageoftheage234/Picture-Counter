@@ -4,6 +4,7 @@ let characterImageArray = [];
 //find image container element using document.getElementById
 let elImageContainer = document.getElementById('image-container');
 
+//use getElementById to find our image tags in HTML
 let  imageOne = document.getElementById('image1');
 let  imageTwo = document.getElementById('image2');
 let  imageThree = document.getElementById('image3')
@@ -19,7 +20,7 @@ let CharacterImage  = function(name, show, filePath){
 };
 
 
-
+//instantiate our counstructor to create multiple instances/objects of our character images
 //let [variable] = newCharacterImage('Name','Show','filePath');
 let Naruto = new CharacterImage('Naruto','Naruto','./Naruto-Naruto.jpg');
 let Sasuke = new CharacterImage('Sasuke','Naruto','./Sasuke-Naruto.jpg');
@@ -48,16 +49,20 @@ let Levi = new CharacterImage('Cpt Levi','Attack On Titan','./CptLevi-AttackOnTi
 let Hange = new CharacterImage('Cmdr Hange','Attack On Titan','./CmdrHange-AttackOnTitan.jpg');
 
 
-
+//push our new instances/objects into our imageArray
 characterImageArray.push(Naruto,Sasuke,Sakura,Itachi,Madara,Goku,Vegeta,Jiren,Piccolo,Gohan,Bart,Lisa,Homer,Marge,Maggie,Cyrril,Cheryl,Pam,Archer,Lana, Armin,Mikasa,Levi,Hange,Eren); 
-
+//define random image function that will select a random image object from our characterimageArray
 function randomImage(){
+    //declare a variable that will calculate a random whole number betwen 0 and the length off the characterImageArray
    let randomNumber = Math.floor(Math.random() * characterImageArray.length);
+   //declare a variable that will store the image object at the index of our random number
    let imageIndex = characterImageArray[randomNumber];
+   // incremeent the shown property of our random image object by 1
    imageIndex.shown += 1;
+   //return our random image object
    return imageIndex;
 };
-
+//declaring variables that will store the return value for our random image function
 let firstImage = randomImage();
 let secondImage = randomImage();
 let thirdImage = randomImage();
@@ -68,14 +73,13 @@ imageTwo.src = secondImage.filePath;
 imageThree.src = thirdImage.filePath;
 
 
-
-
-
+// define even handler function that will increment thetimes clicked for the firstImage
 function imageClicked(event){
     firstImage.clicked += 1; 
     console.log('first Image clicked property',firstImage.clicked);
     console.log('first image shown property', firstImage.shown);
 }; 
+//attach an event listener to the imageOne html tage and listen for a click eent that will invoke addEventListener method
 imageOne.addEventListener('click', imageClicked)
 
 console.log('first image shown property', firstImage.shown);
