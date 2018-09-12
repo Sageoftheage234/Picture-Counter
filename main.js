@@ -64,9 +64,9 @@ let secondImage = randomImage();
 let thirdImage = randomImage();
 
 
-imageOne.src = randomImage().filePath;
-imageTwo.src = randomImage().filePath;
-imageThree.src = randomImage().filePath;
+imageOne.src = firstImage.filePath;
+imageTwo.src = secondImage.filePath;
+imageThree.src = thirdImage.filePath;
 
 
 
