@@ -11,43 +11,44 @@ let elImageContainer = document.getElementById('image-container');
 console.log(elImageContainer);
 
 //create an object constructor that will take in parameters and store properties of an image
-let CharacterImage  = function(name, show, filePath){
+let CharacterImage  = function(name, show, filePath, id){
     this.name = name;
     this.show = show;
     this.filePath = filePath
+    this.id = id;
     this.clicked = 0;
     this.shown = 0;
-    this.addClicks;
+   
 };
 
 
 //instantiate our counstructor to create multiple instances/objects of our character images
 //let [variable] = newCharacterImage('Name','Show','filePath');
-let Naruto = new CharacterImage('Naruto','Naruto','./Naruto-Naruto.jpg');
-let Sasuke = new CharacterImage('Sasuke','Naruto','./Sasuke-Naruto.jpg');
-let Sakura = new CharacterImage('Sakura','Naruto','./Sakura-Naruto.jpg');
-let Itachi = new CharacterImage('Itachi','Naruto','./Itachi-Naruto.jpg');
-let Madara = new CharacterImage('Madara','Naruto','./Madara-Naruto.jpg');
-let Goku = new CharacterImage('Goku','DragonBall-Z','./Goku-DragonBallZ.jpeg');
-let Jiren = new CharacterImage('Jiren','DragonBall-Z','./Jiren-DragonBallZ.jpg');
-let Vegeta = new CharacterImage('Vegeta','DragonBall-Z','./Vegeta-DragonBallZ.jpg');
-let Gohan = new CharacterImage('Gohan','DragonBall-Z','./Gohan-DragonBallZ.jpg');
-let Piccolo = new CharacterImage('Piccolo','DragonBall-Z','./Piccolo-DragonBallZ.jpg');
-let Bart = new CharacterImage('Bart','The Simpsons','./Bart-Simpsons.png');
-let Lisa = new CharacterImage('Lisa','The Simpsons','./Lisa-Simpsons.png');
-let Homer = new CharacterImage('Homer','The Simpsons','./Homer-Simpsons.png');
-let Marge = new CharacterImage('Marge','The Simpsons','./Marge-Simpsons.png');
-let Maggie = new CharacterImage('Maggie','The Simpsons','./Maggie-Simpsons.png');
-let Lana = new CharacterImage('Lana','Archer','./Lana-Archer.jpg');
-let Cheryl = new CharacterImage('Cheryl','Archer','./Cheryl-Archer.jpg');
-let Archer = new CharacterImage('Archer','Archer','./Archer-Archer.jpg');
-let Cyrril = new CharacterImage('Cyrril','Archer','./Cyrril-Archer.jpg');
-let Pam = new CharacterImage('Pam','Archer','./Pam-Archer.jpg');
-let Armin = new CharacterImage('Armin','Attack On Titan','./Armin-AttackOnTitan.jpg');
-let Eren = new CharacterImage('Eren','Attack On Titan','./Eren-AttackOnTitan.png');
-let Mikasa= new CharacterImage('Mikasa','Attack On Titan','./Mikasa-AttackOnTitan.jpg');
-let Levi = new CharacterImage('Cpt Levi','Attack On Titan','./CptLevi-AttackOnTitan.png');
-let Hange = new CharacterImage('Cmdr Hange','Attack On Titan','./CmdrHange-AttackOnTitan.jpg');
+let Naruto = new CharacterImage('Naruto','Naruto','./Naruto-Naruto.jpg', 'naruto');
+let Sasuke = new CharacterImage('Sasuke','Naruto','./Sasuke-Naruto.jpg', 'sasuke');
+let Sakura = new CharacterImage('Sakura','Naruto','./Sakura-Naruto.jpg', 'sakura');
+let Itachi = new CharacterImage('Itachi','Naruto','./Itachi-Naruto.jpg', 'itachi');
+let Madara = new CharacterImage('Madara','Naruto','./Madara-Naruto.jpg', 'madara');
+let Goku = new CharacterImage('Goku','DragonBall-Z','./Goku-DragonBallZ.jpeg', 'goku');
+let Jiren = new CharacterImage('Jiren','DragonBall-Z','./Jiren-DragonBallZ.jpg','jiren');
+let Vegeta = new CharacterImage('Vegeta','DragonBall-Z','./Vegeta-DragonBallZ.jpg','vegeta');
+let Gohan = new CharacterImage('Gohan','DragonBall-Z','./Gohan-DragonBallZ.jpg','gohan');
+let Piccolo = new CharacterImage('Piccolo','DragonBall-Z','./Piccolo-DragonBallZ.jpg', 'piccolo');
+let Bart = new CharacterImage('Bart','The Simpsons','./Bart-Simpsons.png', 'bart');
+let Lisa = new CharacterImage('Lisa','The Simpsons','./Lisa-Simpsons.png','lisa');
+let Homer = new CharacterImage('Homer','The Simpsons','./Homer-Simpsons.png', 'homer');
+let Marge = new CharacterImage('Marge','The Simpsons','./Marge-Simpsons.png','marge');
+let Maggie = new CharacterImage('Maggie','The Simpsons','./Maggie-Simpsons.png','maggie');
+let Lana = new CharacterImage('Lana','Archer','./Lana-Archer.jpg', 'lana');
+let Cheryl = new CharacterImage('Cheryl','Archer','./Cheryl-Archer.jpg', 'cheryl');
+let Archer = new CharacterImage('Archer','Archer','./Archer-Archer.jpg', 'archer');
+let Cyrril = new CharacterImage('Cyrril','Archer','./Cyrril-Archer.jpg', 'cyrril');
+let Pam = new CharacterImage('Pam','Archer','./Pam-Archer.jpg', 'pam');
+let Armin = new CharacterImage('Armin','Attack On Titan','./Armin-AttackOnTitan.jpg','armin');
+let Eren = new CharacterImage('Eren','Attack On Titan','./Eren-AttackOnTitan.png', 'eren');
+let Mikasa= new CharacterImage('Mikasa','Attack On Titan','./Mikasa-AttackOnTitan.jpg', 'mikasa');
+let Levi = new CharacterImage('Cpt Levi','Attack On Titan','./CptLevi-AttackOnTitan.png', 'levi');
+let Hange = new CharacterImage('Cmdr Hange','Attack On Titan','./CmdrHange-AttackOnTitan.jpg','hange');
 
 
 //push our new instances/objects into our imageArray
@@ -64,6 +65,11 @@ function randomImage(){
    return imageIndex;
 };
 
+let firstImage;
+let secondImage;
+let thirdImage;
+
+
 // define a function that will display the Random images
 function displayImages(){
     for(let i = 0; i < 3; i++){
@@ -72,76 +78,26 @@ function displayImages(){
         elImageContainer.appendChild(elImage);
         elImage.setAttribute('id', imageObject.name);
         elImage.src = imageObject.filePath;
-
-        //elimage.innerHTML = 
+        elImage.addEventListener('click', imageClicked);
+        imageObject.shown += 1;
+        if (i === 0){
+            firstImage = imageObject;//elImage
+        } else if (i === 1){
+            secondImage = imageObject;//elImage;
+        } else {
+            thirdImage = imageObject; //elImage;
+        }
     }
 }
+
 displayImages();
-
-
-
-
-
-
-
-// //declaring variables that will store the return value for our random image function
-// let firstImage = randomImage();
-// let secondImage = randomImage();
-// let thirdImage = randomImage();
-
-// //let the src attribute of our image tages to the filePath of our new images
-// imageOne.src = firstImage.filePath;
-// imageTwo.src = secondImage.filePath;
-// imageThree.src = thirdImage.filePath;
-
+console.log(elImageContainer);
+console.log('images', firstImage, secondImage, thirdImage);
 
 // define even handler function that will increment thetimes clicked for the firstImage
 function imageClicked(event){
-    firstImage.clicked += 1; 
+    firstImage.clicked += 1;
     secondImage.clicked += 1;
     thirdImage.clicked += 1;
     console.log('event', event.target.id);
-    
 }; 
-//attach an event listener to the imageOne html tage and listen for a click eent that will invoke addEventListener method
-// imageOne.addEventListener('click', imageClicked)
-
-    // if(event.target.id === firstImage.id){
-        //         firstImage.clicked += 1;
-        //     } else if(event.target.id === secondImage.id){
-        //             secondImage.clicked += 1;
-        //         } else if (event.target.id === thirdImage.id){
-        //                 thirdImage.clicked += 1;
-        //             }
-        //         }
-        //         displayImages();
-                
-        //         localStorage.setItem('storageHeroImgArr', JSON.stringify(characterImageArray));
-                
-                
-        //         let firstImage;
-        //         let secondImage;
-        //         let thirdImage
-                
-                
-                // function displayImages(){
-                    //     elImageContainer.innerHTML = '';
-                        //         let elImage = document.createElement('img');
-                        //         let imageObject = randomImage();
-                        //         elImageContainer.appendChild(elImage);
-                        //         elImage.setAttribute('id', imageObject.id);
-                        //         elImage.src = imageObject.filePath;
-                        //         elImage.addEventListener('click', imageClicked);
-//         imageObject.shown += 1;
-
-//         if(i===0){
-//             firstimage = imageObject;
-//         } else if (i === 1){
-//             secondImage = imageObject;
-//     }
-// }  
-
-//displayImages();
-
-//console.log(elImageContainer);
-//console.log('images', firstImage, secondImage, thirdImage)
