@@ -66,15 +66,23 @@ function randomImage(){
 
 // define even handler function that will increment thetimes clicked for the images
 function imageClicked(event){
+    // if the id associated with the event target is associatd with firstImage, then  add click event increment by 1
     if (event.target.id === firstImage.id){
         firstImage.clicked += 1;
+    // if the id associated with event target the secondImage.id  is not the firstImage, but is the secondImage, add click event increment by 1
     } else if (event.target.id === secondImage.id){
         secondImage.clicked += 1;;
+    // if the id associated with the event target is not firstImage, nor secondImage, but IS associated with thirdImage then add click event increment by 1
     } else if(event.target.id === thirdImage.id){
         thirdImage.clicked += 1;
     }
+    //prints the event target as the id of the ImageObject
+    console.log('event target', event.target.id)
+    //prints the number of click events in accordance with the associated image
+    console.log('images', firstImage.clicked, secondImage.clicked, thirdImage.clicked)
 };
 
+//declare unassigned global variables for images to use in an local assignment  
 let firstImage 
 let secondImage;
 let thirdImage;
@@ -82,26 +90,46 @@ let thirdImage;
 
 // define a function that will display the Random images
 function displayImages(){
+    //assign the elImageContainer to innerHTML each time the for loop runs
+    elImageContainer.innerHTML = '';
     for(let i = 0; i < 3; i++){
-        //declared local variable elImage an assigned it an img tag in HTML
-        let elImage = document.createElement('img');
         //declared local variable imageObject and assigned it the randomImage method  which invokes the global variable randomImage() method 
-        let imageObject = randomImage();
+        let imageObject = randomImage();//declaration is moved up above the elImage, to prevent conflicts with DOM HTML 
+        //declared local variable elImage an assigned it an img tag in HTML
+        //assign the imageObject to one of the three images in the image container and validate the image
+        //use a conditional statement to validate that current random imageObjects are chosen from the ImageIndex array  
+        if (i === 0){//moved up to immediately validate that randomImages are populating properly
+        //to populate the images the firstimage must be the imageObject with the index "0" or false
+            firstImage = imageObject; 
+        //if ImageObject is assign as index 1 then it can be the secondImage   
+        }else if (i === 1){
+            //run a while the conition is true generate a new random image if the shown  firstImage id is equal to the  secondImage id
+            while(imageObject.id === firstImage.id){
+                   imageObject = randomImage();
+                   console.log('second while', imageObject.id)
+            };
+            secondImage = imageObject;
+         //if imageObject is not index 0 or 1, then it can be used as the thirdImage
+        }else {
+            // run a while the conition is true generate a new random image if the shown thirdImage  is equal to first OR secondImage id
+            while(imageObject.id === firstImage.id || imageObject.id === secondImage.id){
+                    imageObject = randomImage();
+                    console.log('third while', imageObject.id)
+            }
+            thirdImage = imageObject; 
+        };
+
+        let elImage = document.createElement('img');
         // append elImage to the elImageContainer in HTML via the DOM
         elImageContainer.appendChild(elImage);
         //set an id attribute to image element
         elImage.setAttribute('id', imageObject.id);
-        
+        //set the image HTML source tag as the images file path 
         elImage.src = imageObject.filePath;
+        //added an eventlistener to each image and to store the event within the "click" property of the image variable
         elImage.addEventListener('click', imageClicked);
+        //store the number of times the image is shown within the imageObject "shown" property shown events 
         imageObject.shown += 1;
-        if (i === 0){
-            firstImage = imageObject; //elImage
-        }else if (i === 1){
-            secondImage = imageObject; //elImage
-        } else {
-            thirdImage = imageObject; //elImage
-        }
     }
 };
 displayImages();
