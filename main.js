@@ -18,7 +18,6 @@ let CharacterImage  = function(name, show, filePath, id){
     this.id = id;
     this.clicked = 0;
     this.shown = 0;
-   
 };
 
 
@@ -65,7 +64,18 @@ function randomImage(){
    return imageIndex;
 };
 
-let firstImage;
+// define even handler function that will increment thetimes clicked for the images
+function imageClicked(event){
+    if (event.target.id === firstImage.id){
+        firstImage.clicked += 1;
+    } else if (event.target.id === secondImage.id){
+        secondImage.clicked += 1;;
+    } else if(event.target.id === thirdImage.id){
+        thirdImage.clicked += 1;
+    }
+};
+
+let firstImage 
 let secondImage;
 let thirdImage;
 
@@ -73,31 +83,27 @@ let thirdImage;
 // define a function that will display the Random images
 function displayImages(){
     for(let i = 0; i < 3; i++){
+        //declared local variable elImage an assigned it an img tag in HTML
         let elImage = document.createElement('img');
+        //declared local variable imageObject and assigned it the randomImage method  which invokes the global variable randomImage() method 
         let imageObject = randomImage();
+        // append elImage to the elImageContainer in HTML via the DOM
         elImageContainer.appendChild(elImage);
-        elImage.setAttribute('id', imageObject.name);
+        //set an id attribute to image element
+        elImage.setAttribute('id', imageObject.id);
+        
         elImage.src = imageObject.filePath;
         elImage.addEventListener('click', imageClicked);
         imageObject.shown += 1;
         if (i === 0){
-            firstImage = imageObject;//elImage
-        } else if (i === 1){
-            secondImage = imageObject;//elImage;
+            firstImage = imageObject; //elImage
+        }else if (i === 1){
+            secondImage = imageObject; //elImage
         } else {
-            thirdImage = imageObject; //elImage;
+            thirdImage = imageObject; //elImage
         }
     }
-}
-
+};
 displayImages();
 console.log(elImageContainer);
 console.log('images', firstImage, secondImage, thirdImage);
-
-// define even handler function that will increment thetimes clicked for the firstImage
-function imageClicked(event){
-    firstImage.clicked += 1;
-    secondImage.clicked += 1;
-    thirdImage.clicked += 1;
-    console.log('event', event.target.id);
-}; 
