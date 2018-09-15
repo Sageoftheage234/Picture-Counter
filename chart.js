@@ -1,5 +1,5 @@
 //get canvas elementbyID
-let elClickChart = document.getElementById('myChart').getContext('2d');
+let elChart = document.getElementById('myChart').getContext('2d');
 
 
 //definee a function that populates chart by looping through Image array
@@ -7,46 +7,43 @@ let elClickChart = document.getElementById('myChart').getContext('2d');
 
 function populateChart(prop){
     //assign characterPropsArray as an  empty which will be filled later on
-    let charaterPropsArray = [];
-    //
+    let propsArray = [];
     for(let i = 0; i < characterImageArray.length; i++){
-    //push the objects in the CharacterImageArray 
-    charaterPropsArray.push(characterImageArray[i][prop])
-    };
+       propsArray.push(characterImageArray[i][prop]);
+       console.log(propsArray);
+    }
     //return the 
-    return charaterPropsArray;
+    return propsArray;
 };
 
 
-// instantiate a new object constructor 
-function displayChart(){
-    //ensures that the elChart object is shown on the HTML page 
-    elClickChart.innerHTML = '';
-    let myChart = new Chart(elClickChart,{
+// declares displayChart variable and assigns 
+function displayChart() {
+    elChart.innerHTML = '';
+    let myChart = new Chart(elChart, {
         //assigns the  type property to become a bar chart's 
         type: 'bar',
-        //assigh the dat 
+        //assign the data property to contain objects such as subproperties, arrays and functions required to present data on graph and to HTML
         data: {
-            //invoke the populateChart function which passes the  'name' parameter as a string to access the name properties of the imageobject stored within the characterImageArray. 
             labels: populateChart('name'),
             datasets: [
-                {//click properties associated with the populate first graph that will show the click count for the specific imageObject
-                    label: 'Click Count',
+                {
+                    //click properties associated with the populate first graph that will show the click count for the specific imageObject
+                    label:'Click Count',
                     data: populateChart('clicked'),
-                    backgroundColor:'grey',
-
+                    backgroundColor:'blue',
                 },
-                {// shown data properties generated from the shown propertys of each the imageObject in the characterImageArray
-                    label: 'Display Count',
+                {
+                    label:'Display Count',
                     data: populateChart('shown'),
-                    backgroundColor: 'gray',
+                    backgroundColor: 'red',
                 }
             ],
             options: {
-                scales:{
-                    yAxes:[{
-                        ticks:{
-                            beginAtZero: true
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
                         }
                     }]
                 }
@@ -54,5 +51,3 @@ function displayChart(){
         }
     });
 }
-
-displayChart();
