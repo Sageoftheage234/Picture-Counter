@@ -80,6 +80,7 @@ function imageClicked(event){
     console.log('event target', event.target.id)
     //prints the number of click events in accordance with the associated image
     console.log('images', firstImage.clicked, secondImage.clicked, thirdImage.clicked)
+    displayImages();
 };
 
 //declare unassigned global variables for images to use in an local assignment  
