@@ -1,19 +1,20 @@
 //get canvas elementbyID
 let elChart = document.getElementById('myChart').getContext('2d');
-
-
+//let imported = document.createELement('script')
+//imported.src = './main.js';
+//
 //definee a function that populates chart by looping through Image array
 
-
-function populateChart(prop){
+//document.head.appendChild(imported)
+function populateChart(property){
     //assign characterPropsArray as an  empty which will be filled later on
-    let propsArray = [];
+    let propertyArray = [];
     for(let i = 0; i < characterImageArray.length; i++){
-       propsArray.push(characterImageArray[i][prop]);
-       console.log(propsArray);
+        propertyArray.push(characterImageArray[i][property]);
+       console.log(propertyArray);
     }
     //return the 
-    return propsArray;
+    return propertyArray;
 };
 
 
@@ -50,4 +51,5 @@ function displayChart() {
             }
         }
     });
-}
+};
+//</script>

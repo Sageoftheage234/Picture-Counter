@@ -18,21 +18,24 @@ let CharacterImage  = function(name, show, filePath, id){
     this.id = id;
     this.clicked = 0;
     this.shown = 0;
-    this.addClicks;
+    //this.addClicks;
 };
 
-let getData = localStorage.getItem('storageCharacterImageArray');
+let TotalClicked = 0;
 
 //check to verify if local storage exists
-// if(localStorage.length > 0){
+ if(localStorage.length > 0){
+    let getData = localStorage.getItem('storageCharacterImageArray');
 //     //retrieve stored character Image array from local storage that contains updated clicks and showns
-
+       characterImageArray = JSON.parse(getData);
 //     //reassign the value of characterImageArray to the parsed version in local storage
-//     characterImageArray = JSON.parse(getData);
-// } else {
-//     //if local storage does not exist, instantiate the constructor to create multiple objects of character images 
+    TotalClicked = localStorage.getItem('TotalClickedStorage');
 
+
+} else {
+    //     //if local storage does not exist, instantiate the constructor to create multiple objects of character images 
     //instantiate our counstructor to create multiple instances/objects of our character images
+
     //let [variable] = newCharacterImage('Name','Show','filePath');
     let Naruto = new CharacterImage('Naruto','Naruto','./Naruto-Naruto.jpg', 'naruto');
     let Sasuke = new CharacterImage('Sasuke','Naruto','./Sasuke-Naruto.jpg', 'sasuke');
@@ -62,7 +65,7 @@ let getData = localStorage.getItem('storageCharacterImageArray');
 
     //push  new instances/objects into  characterImageArray
     characterImageArray.push(Naruto,Sasuke,Sakura,Itachi,Madara,Goku,Vegeta,Jiren,Piccolo,Gohan,Bart,Lisa,Homer,Marge,Maggie,Cyrril,Cheryl,Pam,Archer,Lana, Armin,Mikasa,Levi,Hange,Eren); 
-//};
+};
 
 //define random image function that will select a random image object from our characterimageArray
 function randomImage(){
@@ -75,6 +78,60 @@ function randomImage(){
    //return our random image object
    return imageIndex;
 };
+
+
+//declare unassigned global variables for images to use in an local assignment  
+let firstImage; 
+let secondImage;
+let thirdImage;
+
+
+// define a function that will display the Random images
+function displayImages(){
+    //reassign the elImageContainer to innerHTML each time the for loop runs
+    elImageContainer.innerHTML = '';
+    for(let i = 0; i < 3; i++){
+        //declared local variable imageObject and assigned it the randomImage method  which invokes the global variable randomImage() method 
+        let imageObject = randomImage();//declaration is moved up above the elImage, to prevent conflicts with DOM HTML 
+        //declared local variable elImage an assigned it an img tag in HTML
+        //assign the imageObject to one of the three images in the image container and validate the image
+        //use a conditional statement to validate that current random imageObjects are chosen from the ImageIndex array  
+        if (i === 0){//moved up to immediately validate that randomImages are populating properly
+            //to populate the images the firstimage must be the imageObject with the index "0" or false
+            firstImage = imageObject; 
+            //if ImageObject is assign as index 1 then it can be the secondImage   
+        }else if (i === 1) {
+            //run a while the conition is true generate a new random image if the shown  firstImage id is equal to the  secondImage id
+            while(imageObject.id === firstImage.id){
+                imageObject = randomImage();
+                console.log('second while', imageObject.id);
+            }
+            secondImage = imageObject;
+         //if imageObject is not index 0 or 1, then it can be used as the thirdImage
+        } else {
+            // run a while the conition is true generate a new random image if the shown thirdImage  is equal to first OR secondImage id
+            while(imageObject.id === firstImage.id || imageObject.id === secondImage.id) {
+                imageObject = randomImage();
+                console.log('third while', imageObject.id);
+            }
+            thirdImage = imageObject; 
+        };
+        
+        let elImage = document.createElement('img');
+        // append elImage to the elImageContainer in HTML via the DOM
+        elImageContainer.appendChild(elImage);
+        //set an id attribute to image element
+        elImage.setAttribute('id', imageObject.id);
+        //set the image HTML source tag as the images file path 
+        elImage.src = imageObject.filePath;
+        //added an eventlistener to each image and to store the event within the "click" property of the image variable
+        elImage.addEventListener('click', imageClicked);
+        //increment the shown property  by 1 for each, time the imageObject "shown"   
+        imageObject.shown += 1;
+    };
+};
+//invoke the displayImages function 
+displayImages();
 
 // define even handler function that will increment thetimes clicked for the images
 function imageClicked(event){
@@ -93,72 +150,37 @@ function imageClicked(event){
     //prints the number of click events in accordance with the associated image
     console.log('images', firstImage.clicked, secondImage.clicked, thirdImage.clicked);
     
-    //invokes displayImages functions to display 3 new random images after the click event 
-    displayImages();
-
+      //invokes displayImages functions to display 3 new random images after the click event 
+      displayImages();
+      //Total clicks increases by 1 after each click
+      TotalClicked += 1;
+      //print the TotalClicked variable as each click increases
+      console.log(TotalClicked);
+    
     //every time image is clicked, local storage saves character image array.
-   //localStorage.setItem('storageCharacterImageArray', JSON.stringify(characterImageArray));
-
+    localStorage.setItem('storageCharacterImageArray', JSON.stringify(characterImageArray));
+    localStorage.setItem('TotalClickedStorage', TotalClicked);
     //invoke chart function to display data  for images clicked and shown
-    displayChart();
+    displayChartNow();
 };
 
 
-//declare unassigned global variables for images to use in an local assignment  
-let firstImage 
-let secondImage;
-let thirdImage;
+function displayChartNow(){
+    if(TotalClicked > 25){
+        elImageContainer.removeEventListener('click', imageClicked)
+        displayChart();
+        localStorage.clear();
+    };
 
-
-// define a function that will display the Random images
-function displayImages(){
-    //reassign the elImageContainer to innerHTML each time the for loop runs
-    elImageContainer.innerHTML = '';
-    for(let i = 0; i < 3; i++){
-        //declared local variable imageObject and assigned it the randomImage method  which invokes the global variable randomImage() method 
-        let imageObject = randomImage();//declaration is moved up above the elImage, to prevent conflicts with DOM HTML 
-        //declared local variable elImage an assigned it an img tag in HTML
-        //assign the imageObject to one of the three images in the image container and validate the image
-        //use a conditional statement to validate that current random imageObjects are chosen from the ImageIndex array  
-        if (i === 0){//moved up to immediately validate that randomImages are populating properly
-        //to populate the images the firstimage must be the imageObject with the index "0" or false
-            firstImage = imageObject; 
-        //if ImageObject is assign as index 1 then it can be the secondImage   
-        }else if (i === 1) {
-            //run a while the conition is true generate a new random image if the shown  firstImage id is equal to the  secondImage id
-            while(imageObject.id === firstImage.id){
-                   imageObject = randomImage();
-                   console.log('second while', imageObject.id);
-            }
-            secondImage = imageObject;
-         //if imageObject is not index 0 or 1, then it can be used as the thirdImage
-        } else {
-            // run a while the conition is true generate a new random image if the shown thirdImage  is equal to first OR secondImage id
-            while(imageObject.id === firstImage.id || imageObject.id === secondImage.id) {
-                    imageObject = randomImage();
-                    console.log('third while', imageObject.id);
-            }
-            thirdImage = imageObject; 
-        };
-
-        let elImage = document.createElement('img');
-        // append elImage to the elImageContainer in HTML via the DOM
-        elImageContainer.appendChild(elImage);
-        //set an id attribute to image element
-        elImage.setAttribute('id', imageObject.id);
-        //set the image HTML source tag as the images file path 
-        elImage.src = imageObject.filePath;
-        //added an eventlistener to each image and to store the event within the "click" property of the image variable
-        elImage.addEventListener('click', imageClicked);
-        //increment the shown property  by 1 for each, time the imageObject "shown"   
-        imageObject.shown += 1;
-    }
 };
+
+
+
+
 
 //invoke displayImages function to display the three initial images
-displayImages();
-console.log(elImageContainer);
-console.log('images', firstImage, secondImage, thirdImage);
-
+//displayImages();
+//console.log(elImageContainer);
+//console.log('images', firstImage, secondImage, thirdImage);
 
 //localStorage.setItem('storageCharacterImageArray', JSON.stringify(characterImageArray));
